@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TezosToolkit } from "@taquito/taquito";
 import "./App.css";
 import { Tzip12Module } from "@taquito/tzip12";
@@ -9,6 +9,7 @@ import Transfers from "./components/Transfers";
 import Header from './components/Header';
 import CreateNFT from './components/CreateNFT';
 import TokenComponent from './components/Token';
+import {tzip12} from '@taquito/tzip12';
 import {
   BrowserRouter as Router,
   Switch,
@@ -35,12 +36,13 @@ enum BeaconConnection {
     symbol:string;
     token_id:string;
     sale?:boolean;
-    amount:number;
+    amount?:number;
     owner?:string;
   
   }
 const App = () => {
   let match = useRouteMatch();
+  
     const [Tezos, setTezos] = useState<TezosToolkit>(
         new TezosToolkit("https://edonet.smartpy.io/")
       );
@@ -56,7 +58,8 @@ const App = () => {
       const [beaconConnection, setBeaconConnection] = useState<boolean>(false);
       const [activeTab, setActiveTab] = useState<string>("transfer");
 
-      //minter
+
+            //minter
       // const contractAddress: string = "KT1KRxtTDy6HhKpG1yYtJ9GS3ivs2fRqJqDg";
       const contractAddress:string = "KT1JTJiHw1cYS8USWreycD5oZAVDhCgpXhQu";
       //token contract
@@ -65,6 +68,48 @@ const App = () => {
         // console.log(storage);
         // console.log(tokenStorage);
         Tezos.addExtension(new Tzip12Module());
+        useEffect(()=>{
+
+      
+      (async (): Promise<void> => {
+        // setUserAddress(userAddress);
+        // // updates balance
+        // const balance = await Tezos.tz.getBalance(userAddress);
+        // setUserBalance(balance.toNumber());
+        // creates contract instance
+        const contract = await Tezos.wallet.at(contractAddress);
+        const tokenContract = await Tezos.wallet.at(tokenContractAddress, tzip12);
+        const storageTemp: any = await contract.storage();
+        const tokenStorage : any = await tokenContract.storage();
+        const tokenCount:number = tokenStorage.all_tokens.c[0];
+        let tempMetadata:any = [];
+        for(let i=0;i<tokenCount;i++){
+          tempMetadata[i]=(await tokenContract.tzip12().getTokenMetadata(i));
+        }
+        let storage:any = [];
+        let tokenMetadata:Array<token> = [];
+        tempMetadata.forEach(function(element:any){
+          tokenMetadata.push({decimal:element.decimal,description:element.description, name:element.name,image:element.image,token_id:element.token_id,symbol:element.symbol})
+        });
+    
+        let x:number = 0;
+        storageTemp.saleMap.valueMap.forEach(function(element:any, key:number){
+          // console.log(element);
+          tokenMetadata[x].sale=element.sale;
+          tokenMetadata[x].amount = element.amount.c[0] / 1000000;
+          tokenMetadata[x].owner = element.owner;
+          x++;
+        });
+    
+        setContract(contract);
+        setTokenContract(tokenContract);
+        setStorage(storage);
+        setTokenStorage(tokenMetadata);
+      })();
+    },[]);
+
+
+
       // console.log(match)
     return (
      

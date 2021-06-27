@@ -21,7 +21,7 @@ type token ={
   symbol:string;
   token_id:string;
   sale?:boolean;
-  amount:number;
+  amount?:number;
   owner?:string;
 
 }

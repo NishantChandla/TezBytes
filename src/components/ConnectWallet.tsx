@@ -49,45 +49,45 @@ const ConnectButton = ({
     const balance = await Tezos.tz.getBalance(userAddress);
     setUserBalance(balance.toNumber());
     // creates contract instance
-    const contract = await Tezos.wallet.at(contractAddress);
-    const tokenContract = await Tezos.wallet.at(tokenContractAddress, tzip12);
-    const storageTemp: any = await contract.storage();
-    const tokenStorage : any = await tokenContract.storage();
-    const tokenCount:number = tokenStorage.all_tokens.c[0];
-    let tempMetadata:any = [];
-    for(let i=0;i<tokenCount;i++){
-      tempMetadata[i]=(await tokenContract.tzip12().getTokenMetadata(i));
-    }
-    let storage:any = [];
-    type token ={
-      decimal:number;
-      description:string;
-      name:string;
-      image:string;
-      token_id:string;
-      symbol:string;
-      sale?:boolean;
-      amount?:number;
-      owner?:string;
-    }
-    let tokenMetadata:Array<token> = [];
-    tempMetadata.forEach(function(element:any){
-      tokenMetadata.push({decimal:element.decimal,description:element.description, name:element.name,image:element.image,token_id:element.token_id,symbol:element.symbol})
-    });
+    // const contract = await Tezos.wallet.at(contractAddress);
+    // const tokenContract = await Tezos.wallet.at(tokenContractAddress, tzip12);
+    // const storageTemp: any = await contract.storage();
+    // const tokenStorage : any = await tokenContract.storage();
+    // const tokenCount:number = tokenStorage.all_tokens.c[0];
+    // let tempMetadata:any = [];
+    // for(let i=0;i<tokenCount;i++){
+    //   tempMetadata[i]=(await tokenContract.tzip12().getTokenMetadata(i));
+    // }
+    // let storage:any = [];
+    // type token ={
+    //   decimal:number;
+    //   description:string;
+    //   name:string;
+    //   image:string;
+    //   token_id:string;
+    //   symbol:string;
+    //   sale?:boolean;
+    //   amount?:number;
+    //   owner?:string;
+    // }
+    // let tokenMetadata:Array<token> = [];
+    // tempMetadata.forEach(function(element:any){
+    //   tokenMetadata.push({decimal:element.decimal,description:element.description, name:element.name,image:element.image,token_id:element.token_id,symbol:element.symbol})
+    // });
 
-    let x:number = 0;
-    storageTemp.saleMap.valueMap.forEach(function(element:any, key:number){
-      // console.log(element);
-      tokenMetadata[x].sale=element.sale;
-      tokenMetadata[x].amount = element.amount.c[0] / 1000000;
-      tokenMetadata[x].owner = element.owner;
-      x++;
-    });
+    // let x:number = 0;
+    // storageTemp.saleMap.valueMap.forEach(function(element:any, key:number){
+    //   // console.log(element);
+    //   tokenMetadata[x].sale=element.sale;
+    //   tokenMetadata[x].amount = element.amount.c[0] / 1000000;
+    //   tokenMetadata[x].owner = element.owner;
+    //   x++;
+    // });
 
-    setContract(contract);
-    setTokenContract(tokenContract);
-    setStorage(storage);
-    setTokenStorage(tokenMetadata);
+    // setContract(contract);
+    // setTokenContract(tokenContract);
+    // setStorage(storage);
+    // setTokenStorage(tokenMetadata);
   };
 
   const connectWallet = async (): Promise<void> => {
