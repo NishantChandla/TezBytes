@@ -7,7 +7,7 @@ Contract- [smart.py](https://smartpy.io/ide?code=eJzVWVtv3LgVfp9fwSoILKGKPPba2db
 ## A fraud free fundraiser platform
 Live - https://elegant-thompson-2b68ac.netlify.app/
 
-![screenshot](https://imgur.com/a7dwaLP.png)
+![screenshot](https://imgur.com/60cById.png)
 
 
 ## Getting Started
