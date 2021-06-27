@@ -28,9 +28,8 @@ Live - https://elegant-thompson-2b68ac.netlify.app/
 5. Open https://localhost:3000 in your browser to see a sample application.
 
 
-## Initial Commit: May 1, 2021
+## Initial Commit: June 27, 2021
 
-<!-- ## Final Commit: May 3, 2021 -->
 
 
 ## Team Member
