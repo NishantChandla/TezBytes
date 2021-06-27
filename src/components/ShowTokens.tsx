@@ -52,7 +52,7 @@ const ShowToken = ({tokenStorage,storage,contract}:ButtonProps) => {
         <div className="column" key={item.token_id} onClick={(e)=>onClick(item.sale,item.token_id)}>
             <div  className="ui fluid card">
         <div className="image">
-          <img src={`https://ipfs.io/ipfs/${item.image.split('ipfs://')[1]}`}/>
+          <img style={{'maxHeight':"200px",'objectFit':'cover'}} src={`https://ipfs.io/ipfs/${item.image.split('ipfs://')[1]}`}/>
         </div>
         <div className="content">
           <div className="right floated">
@@ -85,27 +85,6 @@ const ShowToken = ({tokenStorage,storage,contract}:ButtonProps) => {
 
     return (
          <div className="ui link three column grid cards">
-            {tokens}
-            {tokens}
-            {tokens}
-            {tokens}
-            {tokens}
-            {tokens}
-            {tokens}
-            {tokens}
-            {tokens}
-            {tokens}
-            {tokens}
-            {tokens}
-            {tokens}
-            {tokens}
-            {tokens}
-            {tokens}
-            {tokens}
-            {tokens}
-            {tokens}
-            {tokens}
-            {tokens}
             {tokens}
         </div>);
 }

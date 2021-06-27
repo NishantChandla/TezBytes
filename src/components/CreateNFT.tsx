@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import { useFilePicker } from 'use-file-picker';
 import { NFTStorage, File } from 'nft.storage';
 import { isConstructorDeclaration } from 'typescript';
+import {useHistory} from 'react-router-dom';
 
 
 const apiKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDY0NmFmRGIyMjhhMGY1RjFhMURDNDQyMjFCQ0E4YTIwNTNlNWUzQzIiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTYyNDY0NjcyNjUwMiwibmFtZSI6IlRleiBCeXRlcyJ9.JfjY624-uOXE9naYfN7Z8QfY1bbO_bZcVihhHL5ke3I';
@@ -13,6 +14,7 @@ type ButtonProps = {
 };
 
 const Create = ({contract}:ButtonProps) => {
+    const history = useHistory();
     const [openFileSelector, { filesContent, loading }] = useFilePicker({
         accept: ['.png','.jpg','.jpeg'],
         multiple:false,
@@ -44,6 +46,8 @@ const Create = ({contract}:ButtonProps) => {
                 try{
                     const op = await contract.methods.minter_entry(amount,description,metadata.data.image.href,name,symbol).send({mutez:true, amount:(parseInt(amount))*(20/100)});
                     await op.confirmation();
+                    const handleOnClick = () => history.push('/');
+                    handleOnClick();
                 }catch(e){
                     console.log(e);
                 }
@@ -54,6 +58,7 @@ const Create = ({contract}:ButtonProps) => {
                 setAmount("0");
                 setDescription("");
                 setSymbol("");
+
           })();
 
          
@@ -80,17 +85,17 @@ const Create = ({contract}:ButtonProps) => {
                 <label>Token Name</label>
                 <input type="text" value={name} onChange={(e)=>setName(e.target.value)} placeholder="Tez Bytes"/>
             </div>
-            {(name.length>20)? (<div className="ui error message">
+            {(name.length>30)? (<div className="ui error message">
             <div className="header">Too long!</div>
-            <p>The name must be less than 20 letters.</p>
+            <p>The name must be less than 30 letters.</p>
         </div>):null}
             <div className={`field required ${loadingSubmit?'disabled':''}`}>
                 <label>Description</label>
                 <input type="text" value={description} onChange={(e)=>setDescription(e.target.value)} placeholder="A digital art piece!"/>
             </div>
-             {(description.length>150)? (<div className="ui error message">
+             {(description.length>300)? (<div className="ui error message">
             <div className="header">Too long!</div>
-            <p>The Description must be less than 150 letters.</p>
+            <p>The Description must be less than 300 letters.</p>
         </div>):null}
             <div className={`field required ${loadingSubmit?'disabled':''}`}>
                 <label>Symbol</label>

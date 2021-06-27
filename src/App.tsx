@@ -111,6 +111,16 @@ const App = () => {
 
 
       // console.log(match)
+      if(tokenStorage.length<1){
+        return ( <div className="ui container">
+        
+            <div className="ui active dimmer"> 
+            <div className="ui text loader">Loading...</div>
+             
+          </div>
+           </div>);
+
+      }else{
     return (
      
         <div className="ui container">
@@ -166,6 +176,7 @@ const App = () => {
             {/* <CreateNFT contract={contract} /> */}
         </div>
         );
+        }
 };
 
 export default App;
