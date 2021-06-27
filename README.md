@@ -55,3 +55,4 @@ Live - https://elegant-thompson-2b68ac.netlify.app/
   - Next.js
 - Database
   - Tezos Blockchains
+  - IPFS(InterPlanetary File System)
