@@ -38,11 +38,6 @@ Live - https://elegant-thompson-2b68ac.netlify.app/
 ### What?
 > I have created a NFT marketplace, that is truely decentralized. There are no applications required to post artwork. Any artist can create a NFT, When someone buys that he will recieve the amount.
 
-### Why?
-> The web is full of NFT marketplaces, None of them are fully decentralized. They require a creator application which will be approved by some centralized authority. Tez Bytes solves this issue.
-> 
-> This project is created to solve these problems and create a decentralized marketplace for art for everyone for anyone.
-
 ### How?
 - Frontend
   - React.js
