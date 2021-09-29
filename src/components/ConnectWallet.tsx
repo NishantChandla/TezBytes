@@ -6,9 +6,6 @@ import {
   BeaconEvent,
   defaultEventCallbacks
 } from "@airgap/beacon-sdk";
-import TransportU2F from "@ledgerhq/hw-transport-u2f";
-import { LedgerSigner } from "@taquito/ledger-signer";
-import {tzip12} from '@taquito/tzip12';
 
 type ButtonProps = {
   Tezos: TezosToolkit;
@@ -94,8 +91,8 @@ const ConnectButton = ({
     try {
       await wallet.requestPermissions({
         network: {
-          type: NetworkType.EDONET,
-          rpcUrl: "https://edonet.smartpy.io/"
+          type: NetworkType.GRANADANET,
+          rpcUrl: "https://granadanet.smartpy.io/"
         }
       });
       // gets user's address
@@ -107,29 +104,14 @@ const ConnectButton = ({
     }
   };
 
-  const connectNano = async (): Promise<void> => {
-    try {
-      setLoadingNano(true);
-      const transport = await TransportU2F.create();
-      const ledgerSigner = new LedgerSigner(transport, "44'/1729'/0'/0'", true);
 
-      Tezos.setSignerProvider(ledgerSigner);
-
-      //Get the public key and the public key hash from the Ledger
-      const userAddress = await Tezos.signer.publicKeyHash();
-      await setup(userAddress);
-    } catch (error) {
-      console.log("Error!", error);
-      setLoadingNano(false);
-    }
-  };
 
   useEffect(() => {
     (async () => {
       // creates a wallet instance
       const wallet = new BeaconWallet({
         name: "Tez Bytes",
-        preferredNetwork: NetworkType.EDONET,
+        preferredNetwork: NetworkType.GRANADANET,
         disableDefaultEvents: true, // Disable all events / UI. This also disables the pairing alert.
         eventHandlers: {
           // To keep the pairing alert, we have to add the following default event handlers back

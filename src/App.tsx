@@ -44,7 +44,7 @@ const App = () => {
   let match = useRouteMatch();
   
     const [Tezos, setTezos] = useState<TezosToolkit>(
-        new TezosToolkit("https://edonet.smartpy.io/")
+        new TezosToolkit("https://granadanet.smartpy.io/")
       );
       const [contract, setContract] = useState<any>(undefined);
       const [tokenContract, setTokenContract] = useState<any>(undefined);
@@ -61,10 +61,10 @@ const App = () => {
 
             //minter
       // const contractAddress: string = "KT1KRxtTDy6HhKpG1yYtJ9GS3ivs2fRqJqDg";
-      const contractAddress:string = "KT1JTJiHw1cYS8USWreycD5oZAVDhCgpXhQu";
+      const contractAddress:string = "KT1QTq4Wj8SReYUb4qKJjnE9mZ4vycq7RU2B";
       //token contract
       // const tokenContractAddress: string = "KT1U4PPhYkAhDCJTFgDXZaZuiEeze63KasDV";
-      const tokenContractAddress:string = "KT1CoQ5cd6hkPCxeCj3N5uPWztKfjn4kqXVm";
+      const tokenContractAddress:string = "KT1UW5SVHwGMiKaHW49kcgFva5kXAAQRJATK";
         // console.log(storage);
         // console.log(tokenStorage);
         Tezos.addExtension(new Tzip12Module());
@@ -111,7 +111,7 @@ const App = () => {
 
 
       // console.log(match)
-      if(tokenStorage.length<1){
+      if(tokenStorage.length<1 && false){
         return ( <div className="ui container">
         
             <div className="ui active dimmer"> 

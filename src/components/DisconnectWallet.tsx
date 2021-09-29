@@ -26,7 +26,7 @@ const DisconnectButton = ({
     setUserAddress("");
     setUserBalance(0);
     setWallet(null);
-    const tezosTK = new TezosToolkit("https://edonet.smartpy.io/");
+    const tezosTK = new TezosToolkit("https://granadanet.smartpy.io/");
     setTezos(tezosTK);
     setBeaconConnection(false);
     setPublicToken(null);
@@ -36,7 +36,7 @@ const DisconnectButton = ({
       await wallet.client.removeAllPeers();
       await wallet.client.destroy();
     }
-  };
+  };  
 
   return (
     <div className="item right aligned">
